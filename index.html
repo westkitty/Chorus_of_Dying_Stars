@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>The Choir of Dying Stars | Provisional Starsilk Observatory</title>
+<style>
+:root{--void:#09090b;--surface:#111013;--surface2:#171519;--ivory:#f0e9d9;--muted:#afa89c;--faint:#77736d;--gold:#d6b779;--gold2:#8f7245;--line:rgba(213,183,121,.25);--red:#b75b53;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--serif:Georgia,'Times New Roman',serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--void);color:var(--ivory);font-family:var(--sans);font-size:14px;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 75% 9%,rgba(105,69,45,.08),transparent 43%),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:auto,64px 64px}button,select,input{font:inherit;color:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.38}button:focus-visible,input:focus-visible,select:focus-visible,canvas:focus-visible{outline:2px solid #f0d39c;outline-offset:3px}button:hover:not(:disabled){border-color:rgba(233,196,135,.7)}.eyebrow,.micro,.mono,.tag{font-family:var(--mono);text-transform:uppercase;letter-spacing:.16em}.eyebrow{font-size:10px;color:var(--gold)}.micro{font-size:9px;color:var(--faint)}.mono{font-size:11px;letter-spacing:.035em}.shell{max-width:1920px;margin:auto}.topline{height:5px;background:linear-gradient(90deg,transparent 0%,#7e5837 25%,#e5c68b 49%,#7e5837 78%,transparent 100%)}.masthead{display:flex;align-items:center;gap:22px;justify-content:space-between;padding:22px 32px 19px;min-height:114px;border-bottom:1px solid var(--line)}.brand{display:flex;gap:21px;align-items:center;min-width:0}.seal{width:65px;height:65px;border:1px solid rgba(222,187,127,.5);border-radius:50%;position:relative;flex:none;background:radial-gradient(circle,rgba(215,170,95,.1),transparent 70%)}.seal:after,.seal:before{content:"";position:absolute;border-radius:50%;inset:9px;border:1px solid rgba(222,187,127,.35)}.seal:after{inset:23px;border-width:2px;box-shadow:0 0 17px rgba(219,179,97,.36)}.seal i{position:absolute;left:50%;top:-5px;height:73px;border-left:1px solid rgba(222,187,127,.36);transform:rotate(48deg)}.seal i+ i{transform:rotate(-48deg)}.brand h1{font:normal clamp(26px,2.9vw,46px)/.99 var(--serif);letter-spacing:-.035em;margin:4px 0 0}.brand h1 em{font-style:italic;color:var(--gold)}.mast-actions{display:flex;align-items:center;gap:16px}.running{text-align:right;white-space:nowrap}.running strong{display:block;font:normal 12px var(--mono);margin-top:8px}.small-btn{font:10px var(--mono);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);padding:11px 13px;background:#151317;min-height:39px;border-radius:2px}.small-btn[aria-pressed=true]{background:#332717;border-color:var(--gold);color:#f5dca9}.instrument{display:grid;grid-template-columns:minmax(0,1fr) 365px;min-height:550px;border-bottom:1px solid var(--line)}.observatory{position:relative;overflow:hidden;min-height:555px;background:radial-gradient(ellipse at 50% 55%,#16131a 0%,#08090d 65%,#07070a 100%);isolation:isolate}canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}.canvas-top{position:absolute;left:27px;top:24px;pointer-events:none;z-index:2}.canvas-top .eyebrow{display:block;margin-bottom:7px}.canvas-top .ghost{text-transform:uppercase;font:10px var(--mono);letter-spacing:.12em;color:#989082}.canvas-bottom{position:absolute;bottom:22px;left:27px;right:27px;display:flex;justify-content:space-between;align-items:end;gap:10px;pointer-events:none;z-index:2}.canvas-bottom p{margin:0;color:#a79b89;max-width:255px;font:10px/1.7 var(--mono);letter-spacing:.02em}.readout{font:10px var(--mono);color:#a79b89;text-align:right}.readout b{display:block;color:var(--gold);font-weight:normal;margin-bottom:8px}.viewport-controls{position:absolute;left:25px;top:110px;z-index:4;display:flex;flex-direction:column;gap:7px}.viewport-controls button{width:40px;height:40px;background:rgba(16,14,17,.88);border:1px solid var(--line);font:19px var(--serif);border-radius:2px}.viewport-controls button:hover{background:rgba(52,38,25,.9)}.viewport-controls button[aria-pressed=true]{border-color:var(--gold);color:var(--gold)}.tooltip{position:absolute;z-index:5;background:rgba(15,13,15,.94);border:1px solid var(--gold2);pointer-events:none;padding:11px 13px;display:none;box-shadow:0 12px 30px #0009;min-width:165px}.tooltip strong{display:block;font:17px var(--serif);margin:4px 0}.tooltip small{font:9px var(--mono);color:var(--gold);letter-spacing:.09em}.field-fallback{position:absolute;inset:0;z-index:8;display:none;align-items:center;justify-content:center;text-align:center;padding:25px;background:#100f11}.field-fallback strong{font:28px var(--serif);display:block;margin:12px}.field-fallback p{color:var(--muted);max-width:380px;line-height:1.65}.field-caption{position:absolute;top:24px;right:26px;text-align:right;font:10px/1.6 var(--mono);color:#746c63;pointer-events:none;z-index:2}.field-caption span{display:block;color:#a38c6d}.inspection{background:linear-gradient(135deg,#171419,#110f13 55%,#100f12);border-left:1px solid var(--line);padding:23px 24px 21px;position:relative;overflow:visible}.inspection:before{content:"";height:3px;position:absolute;left:0;right:0;top:0;background:linear-gradient(90deg,#9d7746,#e1c38c,#513f2e)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}.section-index{font:10px var(--mono);color:var(--gold);letter-spacing:.12em}.section-head span:last-child{font:9px var(--mono);letter-spacing:.07em;color:var(--faint)}.star-title{font:normal 37px/1 var(--serif);letter-spacing:-.03em;margin:0}.star-sub{font:10px/1.5 var(--mono);color:var(--muted);margin:9px 0 12px;text-transform:uppercase;letter-spacing:.12em}.status{display:inline-flex;align-items:center;gap:8px;padding:7px 9px;background:rgba(182,151,91,.085);border:1px solid rgba(215,180,112,.25);font:10px var(--mono);letter-spacing:.07em}.status:before{content:"";width:6px;height:6px;background:#e9cd9a;border-radius:50%;box-shadow:0 0 9px #f5dba9}.status.dead{color:#f09b8e;background:rgba(155,48,43,.09);border-color:rgba(192,78,65,.45)}.status.dead:before{background:var(--red);box-shadow:0 0 8px var(--red)}.divider{height:1px;background:var(--line);margin:18px 0}.data-label{font:9px var(--mono);letter-spacing:.13em;color:var(--faint);text-transform:uppercase}.node-index{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;margin-top:9px}.node-index button{font:9px var(--mono);border:1px solid #3e342a;background:rgba(232,190,116,.025);padding:10px 0;min-height:36px;border-radius:1px}.node-index button[aria-pressed=true]{background:#38291b;border-color:var(--gold);color:var(--ivory)}.node-index button[data-dead=true]{color:#cc7b72;border-color:#783c38}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:14px 17px;margin-top:12px}.metric strong{display:flex;justify-content:space-between;margin:6px 0 6px;font:14px var(--mono);font-weight:normal}.metric strong small{font:9px var(--mono);color:var(--faint)}.meter{height:3px;background:#322d28;overflow:hidden}.meter i{display:block;height:100%;background:linear-gradient(90deg,#7c5c36,#edce90);width:calc(var(--val,0)*1%)}.caution{color:#8d8073;font:10px/1.6 var(--mono);margin:12px 0 0}.scenario{display:grid;grid-template-columns:1fr;gap:6px;margin-top:11px}.scenario button{border:1px solid #53442f;background:#241d18;padding:12px 13px;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:6px;min-height:50px}.scenario button.active{border-color:var(--gold);background:#302518}.scenario button strong{font:12px var(--serif);font-weight:normal}.scenario button span{font:9px var(--mono);color:var(--gold);text-transform:uppercase}.scenario button:disabled{opacity:.5;background:#181619;border-color:#383035}.scenario button:disabled span{color:#868080}.preview-note{border-left:2px solid var(--gold);padding:10px 11px;margin-top:10px;background:rgba(210,163,94,.06);font:11px/1.6 var(--sans);color:#d3c2a5;display:none}.preview-note strong{display:block;color:#eed4a5;font:11px var(--mono);letter-spacing:.05em;margin-bottom:3px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.action{padding:12px 10px;border:1px solid #6d5735;background:#2b2219;font:10px var(--mono);letter-spacing:.035em;min-height:46px}.action.primary{background:linear-gradient(115deg,#bd9a5e,#eed19c);border-color:#e8c987;color:#21180e;font-weight:700}.action.primary:hover:not(:disabled){filter:brightness(1.1)}.actions .wide{grid-column:span 2}.result{display:none;background:rgba(120,43,41,.07);border:1px solid rgba(167,76,62,.37);padding:14px;margin-top:13px}.result .big{font:normal 21px/1.2 var(--serif);color:#f0c0ae;margin:7px 0}.result .mono{color:#bfa8a2}.result strong{font:10px var(--mono);color:#f1d5b9;display:block;letter-spacing:.05em}.result .row-detail{display:flex;justify-content:space-between;gap:8px;padding-top:10px}.result .row-detail span{font:10px var(--mono);color:#ba9a84}.archive{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(380px,.95fr);border-top:1px solid rgba(255,255,255,.035);min-height:230px}.timeline{padding:26px 30px 26px;border-right:1px solid var(--line);min-width:0}.ledger{padding:26px 30px 26px;min-width:0}.archive h2{font:normal 25px var(--serif);margin:7px 0 11px}.archive p{margin:4px 0 0;font:11px/1.7 var(--sans);color:var(--muted)}.timeline-header{display:flex;justify-content:space-between;gap:20px}.timeline-scale{display:flex;justify-content:space-between;font:9px var(--mono);letter-spacing:.06em;color:var(--faint);margin:13px 0 4px}.timeline input[type=range]{appearance:none;width:100%;background:transparent;height:25px;accent-color:var(--gold);margin:0;cursor:pointer}.timeline input[type=range]::-webkit-slider-runnable-track{height:3px;background:linear-gradient(90deg,var(--gold),#493c2c)}.timeline input[type=range]::-webkit-slider-thumb{appearance:none;width:13px;height:13px;border-radius:50%;border:2px solid #f3d399;background:#231910;margin-top:-5px}.timeline input[type=range]:disabled{opacity:.4;cursor:not-allowed}.timeline-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:9px 0}.timeline-actions button{min-height:38px}.record-mark{font:10px var(--mono);letter-spacing:.025em;color:var(--gold);margin-left:auto}.archive-notice{font:10px/1.6 var(--mono);color:#b29676;padding:9px 11px;background:#221c18;border-left:2px solid #a8844f;display:none}.ledger-bar{display:flex;align-items:start;justify-content:space-between;gap:12px}.ledger-list{max-height:165px;overflow:auto;margin-top:9px;padding-right:5px;scrollbar-color:#65503a transparent}.ledger-entry{display:grid;grid-template-columns:67px 1fr;gap:12px;padding:9px 0;border-top:1px solid rgba(222,188,131,.13)}.ledger-entry time{font:10px var(--mono);color:var(--gold)}.ledger-entry strong{font:10px var(--mono);letter-spacing:.04em;font-weight:normal}.ledger-entry small{display:block;color:#9d9282;font:10px/1.55 var(--mono);margin-top:5px;overflow-wrap:anywhere}.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 30px 25px;color:#877d70;font:10px/1.7 var(--mono);letter-spacing:.035em}.foot strong{color:#ccb182;font-weight:normal}.toast{position:fixed;top:20px;left:50%;transform:translate(-50%,-18px);opacity:0;pointer-events:none;background:linear-gradient(130deg,#201717,#351d1b);padding:18px 24px;border:1px solid #c36e60;border-top:3px solid #e3a88b;box-shadow:0 22px 80px #000d;z-index:40;min-width:min(420px,calc(100vw - 35px));transition:opacity .35s,transform .35s}.toast.show{opacity:1;transform:translate(-50%,0)}.toast .eyebrow{color:#f0ab9c}.toast strong{font:normal 24px/1.3 var(--serif);display:block;margin:5px 0}.toast span{font:11px var(--mono);color:#bfaca5}.mobile-hint{display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:1150px){.instrument{grid-template-columns:minmax(0,1fr) 328px}.inspection{padding:20px 17px}.brand h1{font-size:34px}.masthead{padding:19px 22px}.archive{grid-template-columns:minmax(0,1fr) minmax(335px,.9fr)}}
+@media(max-width:850px){.masthead{padding:18px;align-items:start}.seal{height:47px;width:47px}.seal i{height:55px}.seal:after{inset:16px}.brand{gap:12px}.brand h1{font-size:29px}.mast-actions{gap:7px;flex-wrap:wrap;justify-content:end}.running{display:none}.instrument{display:flex;flex-direction:column}.observatory{height:55vh;min-height:380px;max-height:610px}.inspection{border-left:0;border-top:1px solid var(--line);display:block}.inspection .section-head:first-child,.inspection .star-title,.inspection .star-sub,.inspection .status,.inspection .node-index,.inspection .data-label:first-of-type,.inspection .metrics,.inspection .caution{grid-column:1}.inspection .divider{grid-column:1/-1}.inspection .scenario,.inspection #preview-note,.inspection .actions,.inspection .result{grid-column:2}.inspection .scenario{grid-row:2/span 4}.inspection .actions{grid-row:6}.archive{grid-template-columns:1fr}.timeline{border-right:0;border-bottom:1px solid var(--line)}.ledger-list{max-height:180px}} 
+@media(max-width:620px){.masthead{min-height:104px;gap:5px;align-items:center}.brand h1{font-size:24px}.brand .eyebrow{font-size:8px}.seal{width:41px;height:41px}.seal i{height:49px}.seal:before{inset:6px}.seal:after{inset:14px}.mast-actions{max-width:105px}.mast-actions .small-btn{padding:8px;font-size:9px;min-height:36px}.instrument{min-height:auto}.observatory{min-height:390px;height:52vh}.canvas-top{top:18px;left:15px}.field-caption{display:none}.canvas-bottom{left:15px;bottom:12px;right:13px}.canvas-bottom p{max-width:185px;font-size:9px}.readout{font-size:8px}.viewport-controls{left:11px;top:95px}.viewport-controls button{width:42px;height:42px}.inspection{display:block;padding:22px 18px}.inspection .divider{margin:17px 0}.star-title{font-size:33px}.metrics{gap:12px}.actions{display:grid}.archive h2{font-size:24px}.archive .timeline,.archive .ledger{padding:22px 18px}.timeline-header{gap:5px}.record-mark{width:100%;margin:3px 0}.timeline-actions{align-items:start}.foot{padding:17px 18px;display:block}.foot span{display:block;margin-bottom:8px}.mobile-hint{display:inline}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* Scenario-specific, canon-aware interpretation layer. Display positions never govern causal state. */
+.scenario button[aria-pressed=true]{border-color:var(--gold);background:#302518;box-shadow:inset 2px 0 0 var(--gold)}
+.mode-brief{margin-top:11px;background:radial-gradient(ellipse at 100% 0%,rgba(200,149,83,.07),transparent 67%),#100f12;border:1px solid rgba(210,176,113,.25);padding:12px 13px 13px;min-height:118px}
+.mode-kicker{font:10px/1.5 var(--mono);color:var(--gold);letter-spacing:.12em}
+.mode-brief p{font:11px/1.55 var(--sans);color:#c5b9a6;margin:7px 0 9px}
+.mode-stats{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#a69886;font:9px/1.6 var(--mono);letter-spacing:.03em}
+.mode-stats span:first-child{color:#e1c393}
+.mode-track{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px;margin-top:9px}
+.mode-track i{height:4px;border-radius:1px;background:#41362b;display:block}
+.mode-track i.done{background:#b76558;box-shadow:0 0 8px rgba(198,88,74,.32)}
+.mode-track i.next{background:#edce93;box-shadow:0 0 7px #be915b66}
+.inspection:has(#scenario-siege[aria-pressed=true]) .mode-brief{border-color:rgba(185,98,82,.43)}
+.inspection:has(#scenario-binding[aria-pressed=true]) .mode-brief{border-color:rgba(230,187,121,.48)}
+@media(max-width:620px){.mode-brief{min-height:0}.mode-brief p{font-size:12px}.mode-stats{font-size:9px}}
+
+/* THE SCORE OF SILENCE / event-grounded forensic instrument */
+.requiem{padding:28px 32px 30px;background:linear-gradient(135deg,#100e11,#0c0b0f 63%,#121014);border-bottom:1px solid var(--line);position:relative}
+.requiem:before{content:"";position:absolute;top:0;left:32px;right:32px;height:1px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);opacity:.5}
+.requiem-titlebar{display:flex;justify-content:space-between;align-items:start;gap:18px;margin-bottom:21px}
+.requiem h2{font:normal clamp(25px,3vw,36px)/1.1 var(--serif);margin:7px 0 7px;letter-spacing:-.025em}
+.requiem h2 em{color:var(--gold);font-style:italic}
+.requiem-lead{font:12px/1.65 var(--sans);color:#bcb1a2;max-width:570px;margin:0}
+.requiem-key{display:flex;align-items:center;flex-wrap:wrap;gap:8px 15px;color:#aea18f;font:9px var(--mono);letter-spacing:.05em;margin-top:9px}
+.requiem-key span{display:inline-flex;align-items:center;gap:6px}.requiem-key i{width:16px;height:2px;background:var(--gold);display:inline-block}.requiem-key i.cut{background:#be7467}.requiem-key i.plan{border-top:2px dashed var(--gold);background:none;height:0}
+.requiem-grid{display:grid;grid-template-columns:minmax(0,1.28fr) minmax(290px,.72fr);gap:24px}
+.score-wrap{min-width:0;border:1px solid rgba(213,183,121,.21);background:radial-gradient(ellipse at 62% 40%,rgba(138,94,60,.085),transparent 73%),#0e0d10;padding:15px 17px 14px}
+.score-ruler{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;font:9px var(--mono);color:var(--gold);letter-spacing:.08em;gap:10px}
+.score-axis{display:flex;justify-content:space-between;gap:8px;font:9px var(--mono);color:#8f8274;letter-spacing:.025em;margin-top:11px}
+.score-rows{display:grid;gap:2px}
+.score-row{display:grid;grid-template-columns:48px minmax(0,1fr) 100px;align-items:center;gap:11px;min-height:32px;border:1px solid transparent;background:transparent;text-align:left;padding:3px 6px;color:#c7bba9;width:100%;border-radius:1px}
+.score-row:hover,.score-row[aria-pressed=true]{background:#211a18;border-color:rgba(217,181,117,.41)}
+.score-label{font:10px var(--mono);letter-spacing:.02em}.score-fate{font:9px var(--mono);text-align:right;white-space:nowrap;color:#a89b88}
+.score-row[data-dead=true] .score-fate{color:#d9978b}.score-row[data-preview=true] .score-fate{color:#ddc48c}
+.score-track{position:relative;height:10px;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(8.333% - 1px),rgba(182,153,112,.11) calc(8.333% - 1px),rgba(182,153,112,.11) 8.333%),#242023;overflow:hidden;border-top:1px solid #3b3130;border-bottom:1px solid #3b3130}
+.score-track .alive{position:absolute;inset:1px auto 1px 0;width:100%;background:linear-gradient(90deg,#87663b,#edce94);opacity:.8}
+.score-track .after{position:absolute;inset:1px 0 1px auto;width:0;background:#56312e;opacity:.85}
+.score-track .ending{position:absolute;top:-1px;bottom:-1px;width:3px;background:#ed8e7c;box-shadow:0 0 8px rgba(209,106,91,.65)}
+.score-track .planned{position:absolute;top:0;bottom:0;border-left:2px dashed #e6c481;opacity:.9}
+.score-track .readhead{position:absolute;top:-6px;bottom:-6px;border-left:1px solid #f2eadb;opacity:.85;box-shadow:0 0 9px #e3c49b77;z-index:3;pointer-events:none}
+.witness{border:1px solid rgba(216,178,118,.25);background:linear-gradient(130deg,#1c1718,#141116);padding:18px 18px 16px;min-width:0;position:relative}
+.witness:before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(#c8a36c,#853d38)}
+.witness h3{font:normal 28px/1.1 var(--serif);margin:10px 0 5px}.witness p{font:12px/1.65 var(--sans);color:#c5b6a7;margin:6px 0 11px}
+.witness dl{display:grid;grid-template-columns:1fr 1fr;gap:12px 13px;margin:14px 0 0}.witness dt{font:9px var(--mono);color:#a89479;text-transform:uppercase;letter-spacing:.08em}.witness dd{font:11px/1.45 var(--mono);margin:5px 0 0;overflow-wrap:anywhere;color:#f0dcc0}
+.witness-warning{border-top:1px solid var(--line);padding-top:10px;margin-top:15px!important;font:10px/1.55 var(--mono)!important;color:#b78f87!important}
+.archive-tools{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.import-notice{font:10px/1.55 var(--mono)!important;color:#b8a88f!important;min-height:16px;margin:8px 0 3px!important;overflow-wrap:anywhere}
+.import-notice[data-error=true]{color:#f3aa9a!important}.import-notice[data-ok=true]{color:#dec293!important}
+.sr-input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+@media(max-width:1050px){.requiem-grid{grid-template-columns:1fr 320px;gap:15px}.score-row{grid-template-columns:46px minmax(0,1fr) 80px;gap:8px}}
+@media(max-width:800px){.requiem{padding:23px 20px}.requiem-grid{grid-template-columns:1fr}.requiem-titlebar{display:block}.requiem-key{margin:12px 0}.witness dl{grid-template-columns:repeat(2,minmax(0,1fr))}.archive-tools{justify-content:flex-start}}
+@media(max-width:500px){.requiem{padding:20px 15px}.score-wrap{padding:13px 9px}.score-row{grid-template-columns:39px minmax(0,1fr) 76px;padding:4px 3px;gap:5px;min-height:44px}.small-btn{min-height:44px}.score-fate{font-size:8px}.score-label{font-size:9px}.witness{padding:17px 14px}.requiem h2{font-size:27px}.ledger-bar{flex-wrap:wrap}.ledger .archive-tools{justify-content:flex-start}}
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="topline" aria-hidden="true"></div>
+<header class="masthead">
+  <div class="brand"><div class="seal" aria-hidden="true"><i></i><i></i></div><div><div class="eyebrow">STARSILK / PROVISIONAL COSMOLOGICAL INSTRUMENT</div><h1>The Choir <em>of Dying Stars</em></h1></div></div>
+  <div class="mast-actions"><div class="running"><div class="micro">LOCAL ARCHIVE / BRANCH</div><strong id="branch-header">B-001 &nbsp; | &nbsp; TICK 000</strong></div><button id="quality-btn" class="small-btn" title="Cycle rendering detail" aria-label="Rendering detail: automatic">DETAIL / AUTO</button><button id="audio-btn" class="small-btn" aria-pressed="false">SOUND / OFF</button></div>
+</header>
+<main>
+<section class="instrument" aria-label="Interactive Starsilk observatory">
+  <div class="observatory" id="observatory">
+    <canvas id="sky" tabindex="0" aria-label="Interactive projection of twelve representative stars. Select stars here or with the star-index buttons. Arrow keys switch selection; plus and minus zoom.">Your browser does not support the visual canvas. The star index and simulation controls remain available.</canvas>
+    <div class="field-fallback" id="field-fallback" role="status"><div><div class="eyebrow">OPTICAL FIELD OFFLINE</div><strong>Observation continues.</strong><p>The graphical projection could not be rendered. Star inspection, the deterministic engine, event records, and JSON export remain available in the adjacent instrument.</p></div></div>
+    <div class="canvas-top"><span class="eyebrow">I / THE STELLAR FIELD</span><div class="ghost"><span id="field-mode">12 representative nodes / schematic projection</span></div></div>
+    <div class="field-caption"><span>NOT TO SCALE</span>NO CANONICAL COORDINATES<br>PROJECTION ONLY</div>
+    <div class="viewport-controls" aria-label="Projection controls"><button id="zoom-in" aria-label="Zoom in" title="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out" title="Zoom out">&minus;</button><button id="reset-view" aria-label="Reset projection" title="Reset projection">&#8634;</button><button id="motion-btn" aria-label="Pause ambient projection motion" aria-pressed="false" title="Pause ambient motion">&#10074;&#10074;</button></div>
+    <div class="tooltip" id="tooltip" role="status"><small id="tip-top">REPRESENTATIVE NODE</small><strong id="tip-name">ST-05</strong><small id="tip-bottom">SYSTEM EXTANT</small></div>
+    <div class="canvas-bottom"><p>Drag empty space to pan. Drag a node to rearrange its projection only.<span class="mobile-hint"> Tap a star to inspect.</span></p><div class="readout"><b id="view-status">OBSERVATION / LIVE AUTHORITY</b><div id="projection-readout">PARALLAX 01 &nbsp; / &nbsp; ZOOM 1.00x</div></div></div>
+  </div>
+  <aside class="inspection" aria-label="Star inspection and simulation controls">
+    <div class="section-head"><span class="section-index">II / THE SPECIMEN</span><span>INDIVIDUAL OBSERVATION</span></div>
+    <h2 class="star-title" id="selected-name">ST-05</h2><div class="star-sub">Representative star / noncanonical identifier</div>
+    <div><span class="status" id="star-status" role="status">INTACT / SYSTEM EXTANT</span></div>
+    <div class="divider"></div>
+    <div class="data-label">Stellar index / select a specimen</div><nav class="node-index" id="node-index" aria-label="Select one of twelve representative stellar nodes"></nav>
+    <div class="divider"></div>
+    <div class="section-head"><span class="section-index">STRUCTURAL TELEMETRY</span><span>HYPOTHETICAL INDICES</span></div>
+    <div class="metrics" id="metrics"></div>
+    <p class="caution">Relative model indices only. Neither physical measurements nor new Starsilk laws.</p>
+    <div class="divider"></div>
+    <div class="section-head"><span class="section-index">III / SCENARIO</span><span>3 OPERABLE MODES</span></div>
+    <div class="scenario" role="group" aria-label="Choose the hypothetical simulation mode">
+      <button type="button" class="active" id="scenario-knife" aria-pressed="true"><strong>Star Knife</strong><span>ONE STAR / ONE TICK</span></button>
+      <button type="button" id="scenario-siege" aria-pressed="false"><strong>Siege Wall</strong><span>SEQUENTIAL / 12 CUTS</span></button>
+      <button type="button" id="scenario-binding" aria-pressed="false"><strong>Starbinding</strong><span>ONE MACRO / ONE TICK</span></button>
+    </div>
+    <div class="mode-brief" id="mode-brief" role="status"><div class="mode-kicker" id="mode-kicker">STAR KNIFE / SINGLE EXTRACTION</div><p id="mode-description">One selected star. One successful extraction. One irreversible system loss.</p><div class="mode-stats"><span id="mode-count">0 / 1 EXECUTED</span><span id="mode-scale">HYPOTHETICAL</span></div><div class="mode-track" id="mode-track" role="progressbar" aria-label="Simulation destruction progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"></div></div>
+    <div class="preview-note" id="preview-note" role="status"><strong>SIMULATED OUTCOME / PREVIEW</strong><span id="preview-text">Successful extraction immediately collapses the star into a black hole and destroys its system.</span></div>
+    <div class="actions"><button class="action" id="preview-btn">01 / PREVIEW</button><button class="action primary" id="execute-btn" disabled>02 / AUTHORIZE</button></div>
+    <div class="result" id="result"><div class="eyebrow">IRREVERSIBLE / HYPOTHETICAL</div><div class="big" id="result-title">System destroyed.</div><strong>MACRO EXECUTION: SUCCESSFUL.</strong><div class="row-detail"><span id="result-tick">TICK 001</span><span id="result-id">EV-0001</span></div><div class="mono" id="result-hash" style="padding-top:10px;overflow-wrap:anywhere">CHECKSUM &mdash;</div></div>
+  </aside>
+</section>
+<section class="requiem" aria-label="The Score of Silence, a read-only record of stellar collapses">
+ <div class="requiem-titlebar"><div><div class="section-index">VI / THE SCORE OF SILENCE</div><h2>Twelve notes. <em>And what remains.</em></h2><p class="requiem-lead">An evidence-bound stellar score: each gold line is a simulated intact system. Every crimson interruption marks the exact integer tick when its star collapsed. The tones are synthesized measurements, never consciousness.</p></div><div class="requiem-key"><span><i></i>INTACT</span><span><i class="cut"></i>COLLAPSED</span><span><i class="plan"></i>PREVIEW ONLY</span></div></div>
+ <div class="requiem-grid"><div class="score-wrap"><div class="score-ruler"><span id="score-ruler-label">SIMULATION NOT YET EXECUTED</span><span id="score-ruler-tick">OBSERVING / 000</span></div><div class="score-rows" id="score-rows" role="group" aria-label="Twelve star event histories, select a row to inspect its evidence"></div><div class="score-axis"><span>INITIAL / 000</span><span id="score-axis-end">PROJECTION / NO COLLAPSE</span></div></div>
+ <aside class="witness" aria-label="Causal evidence for selected star"><div class="section-index">VII / CAUSAL WITNESS</div><h3 id="witness-title">ST-05 / Intact</h3><p id="witness-description">No extraction has occurred in this hypothetical branch.</p><dl><div><dt>Selected specimen</dt><dd id="witness-id">ST-05</dd></div><div><dt>Observed tick</dt><dd id="witness-tick">000 / PRESENT</dd></div><div><dt>System result</dt><dd id="witness-system">EXTANT</dd></div><div><dt>Event / tick</dt><dd id="witness-event">NONE</dd></div><div><dt>State at observation</dt><dd id="witness-checksum">—</dd></div><div><dt>Authoritative record</dt><dd id="witness-authority">—</dd></div></dl><p class="witness-warning">Historical playback changes only the observed reconstruction. A destroyed system is never restored in the authoritative state.</p></aside></div>
+</section>
+<section class="archive" aria-label="Simulation playback and archive">
+ <div class="timeline"><div class="section-index">IV / OBSERVATION OF THE RECORD</div><div class="timeline-header"><div><h2>Nothing returns.</h2><p>Reconstruction of the recorded past. No replay can restore a destroyed star system.</p></div></div><div class="timeline-scale"><span id="scale-start">BEFORE / TICK 000</span><span id="scale-middle">EVENT / TICK 001</span><span id="scale-end">AFTERMATH</span></div><label for="scrub" class="sr-only">Historical visual playback position, from pre-extraction to aftermath</label><input id="scrub" type="range" min="0" max="100" value="100" disabled><div class="timeline-actions"><button id="replay-btn" class="small-btn" disabled>REPLAY RECORD</button><button id="present-btn" class="small-btn" disabled>RETURN TO PRESENT</button><button id="new-branch-btn" class="small-btn">NEW BRANCH</button><button id="resume-siege-btn" class="small-btn" hidden>RESUME / SIEGE WALL</button><span id="record-mark" class="record-mark">NO COLLAPSE RECORDED</span></div><div class="archive-notice" id="archive-notice" role="status">ARCHIVAL VISUAL PLAYBACK ONLY. The authoritative star and system remain destroyed.</div></div>
+ <div class="ledger"><div class="ledger-bar"><div><div class="section-index">V / IMMUTABLE EVENT LEDGER</div><h2>Chronicle of consequences</h2></div><div class="archive-tools"><button id="verify-btn" class="small-btn" title="Reconstruct every event in every branch">VERIFY RECORD</button><button id="import-btn" class="small-btn" title="Restore a previously exported offline event ledger">RESTORE / JSON</button><input type="file" class="sr-input" id="import-file" accept=".json,application/json" aria-label="Choose a previously exported Choir event ledger JSON file"><button id="export-btn" class="small-btn">EXPORT / JSON</button></div></div><p>Canon-grounded rules / hypothetical executions / visual playback: separate records. Export before closing; recovery is manual.</p><p class="import-notice" id="import-notice" role="status" aria-live="polite">NO PERSISTENT STORAGE. Restore validates the full event chain before replacing this session.</p><div class="ledger-list" id="ledger-list" aria-live="polite"></div></div>
+</section>
+</main>
+<footer class="foot"><span><strong>RULE OF THE INSTRUMENT:</strong> Successful Starsilk extraction &rarr; immediate stellar collapse &rarr; destruction of the associated system.</span><span>FICTIONAL PROTOTYPE &bull; NOT AN APPROVED CANONICAL INSTITUTION &bull; OFFLINE / SESSION-ONLY</span></footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="assertive"><div class="eyebrow" id="toast-mode">STAR KNIFE / HYPOTHETICAL EVENT</div><strong>MACRO EXECUTION: SUCCESSFUL.</strong><span id="toast-detail">TICK 001 &bull; STELLAR COLLAPSE / SYSTEM DESTROYED</span></div>
+<script>
+(()=>{'use strict';
+/* PURE ENGINE. Rendering, projection, audio, and playback must never mutate these objects. */
+const NODE_COUNT=12, BASE_SEED=0x5A7E51C1, VERSION='choir-engine/2.0';
+const ID=i=>'ST-'+String(i+1).padStart(2,'0');
+function fnv32(str){let h=2166136261>>>0;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}return h.toString(16).toUpperCase().padStart(8,'0');}
+function randomGenerator(seed){let n=seed>>>0;return ()=>{n=(n+0x6D2B79F5)>>>0;let t=n;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};}
+function checksum(state){return 'FNV1A32-'+fnv32(JSON.stringify([VERSION,state.branchId,state.seed>>>0,state.tick,state.nodes.map(n=>[n.id,n.mass,n.flux,n.tension,n.harmonic,n.starState,n.systemState]) ]));}
+function lockState(raw){raw.nodes.forEach(Object.freeze);Object.freeze(raw.nodes);raw.checksum=checksum(raw);return Object.freeze(raw);}
+function createInitial(seed,branchId){const rng=randomGenerator(seed);const nodes=Array.from({length:NODE_COUNT},(_,i)=>({id:ID(i),mass:35+Math.floor(rng()*62),flux:23+Math.floor(rng()*75),tension:26+Math.floor(rng()*70),harmonic:48+Math.floor(rng()*49),starState:'INTACT',systemState:'EXTANT'}));return lockState({version:VERSION,branchId,seed:seed>>>0,tick:0,nodes});}
+function branchOpened(initial){return Object.freeze({id:'EV-0000',branchId:initial.branchId,tick:0,type:'HYPOTHETICAL_BRANCH_OPENED',classification:'HYPOTHETICAL_SIMULATION',starId:null,preChecksum:initial.checksum,postChecksum:initial.checksum,description:'Twelve synthetic stellar specimens initialized; no cosmological action performed.'});}
+const SIEGE_ORDER=Object.freeze(Array.from({length:NODE_COUNT},(_,i)=>ID(i))); // Provisional sample order only; NOT historical chronology.
+const ALL_TARGETS=Object.freeze([...SIEGE_ORDER]);
+function collapseOnTick(state,ids,type,extra={}){
+ if(!Array.isArray(ids)||ids.length===0||new Set(ids).size!==ids.length)throw Error('Invalid extraction target set');
+ for(const id of ids){const target=state.nodes.find(n=>n.id===id);if(!target)throw Error('Unknown specimen '+id);if(target.starState!=='INTACT')throw Error('Death is final: repeated extraction is impossible.');}
+ const hit=new Set(ids);
+ const next=lockState({version:state.version,branchId:state.branchId,seed:state.seed,tick:state.tick+1,nodes:state.nodes.map(n=>hit.has(n.id)?{...n,starState:'COLLAPSED_BLACK_HOLE',systemState:'DESTROYED'}:{...n})});
+ const event=Object.freeze({id:'EV-'+String(next.tick).padStart(4,'0'),branchId:next.branchId,tick:next.tick,type,classification:'HYPOTHETICAL_SIMULATION',scenario:extra.scenario||'STAR_KNIFE',starId:ids.length===1?ids[0]:null,targets:Object.freeze([...ids]),starState:'COLLAPSED_BLACK_HOLE',systemState:'DESTROYED',preChecksum:state.checksum,postChecksum:next.checksum,...extra});
+ return Object.freeze({state:next,event});
+}
+function executeSuccess(state,targetId){if(state.tick!==0)throw Error('Star Knife requires a new hypothetical branch.');return collapseOnTick(state,[targetId],'STAR_KNIFE_EXTRACTION_SUCCESS',{scenario:'STAR_KNIFE',description:'Successful star dive and extraction: stellar collapse and system destruction occur on this exact integer tick.'});}
+function executeSiegeStep(state){if(state.tick>=NODE_COUNT)throw Error('The twelve-node Siege Wall sample is already complete.');const id=SIEGE_ORDER[state.tick];return collapseOnTick(state,[id],'SIEGE_WALL_HELIOCIDE_STEP',{scenario:'SIEGE_WALL',actor:'TIGER',sequenceIndex:state.tick+1,sequenceTotal:NODE_COUNT,description:'Deliberate sequential heliocide / representative lattice strike. Sample order is schematic and NOT canonical historical chronology.'});}
+function executeStarbinding(state){if(state.tick!==0)throw Error('Starbinding must begin on a new hypothetical branch.');return collapseOnTick(state,ALL_TARGETS,'STARBINDING_MACRO_RELEASE',{scenario:'STARBINDING',actor:'CODEC',trigger:'ONE_MACRO',sampleSize:NODE_COUNT,canonScale:'BILLIONS_OF_SUCCESSFUL_STAR_DIVES_NOT_INDIVIDUALLY_SIMULATED',description:'One Macro release: all twelve representative successful star dives collapse on this SAME tick. The canon describes billions; this display simulates twelve only.'});}
+function reconstitute(start,eventList,atTick){
+ let state=start;
+ for(const event of eventList){
+  if(event.type==='HYPOTHETICAL_BRANCH_OPENED')continue;
+  if(!Number.isInteger(event.tick)||event.tick<0)throw Error('Malformed event tick');
+  if(event.tick>atTick)break;
+  let result;
+  if(event.type==='STAR_KNIFE_EXTRACTION_SUCCESS')result=executeSuccess(state,event.starId);
+  else if(event.type==='SIEGE_WALL_HELIOCIDE_STEP')result=executeSiegeStep(state);
+  else if(event.type==='STARBINDING_MACRO_RELEASE')result=executeStarbinding(state);
+  else throw Error('Unrecognized engine event '+event.type);
+  const expected=result.event;
+  if(event.preChecksum!==state.checksum||event.postChecksum!==result.state.checksum||event.tick!==result.state.tick||event.id!==expected.id||event.scenario!==expected.scenario||JSON.stringify(event.targets)!==JSON.stringify(expected.targets)||event.type!==expected.type||(event.type==='SIEGE_WALL_HELIOCIDE_STEP'&&event.sequenceIndex!==expected.sequenceIndex))throw Error('Event integrity mismatch; archive cannot be trusted.');
+  state=result.state;
+ }
+ return state;
+}
+function nextSeed(branchNumber){return (BASE_SEED+Math.imul(branchNumber-1,0x9E3779B9))>>>0;}
+function clone(value){return JSON.parse(JSON.stringify(value));}
+let branchCount=1, initial=createInitial(nextSeed(1),'B-001'), authority=initial, events=Object.freeze([branchOpened(initial)]), retired=[];
+let selectedId='ST-05', previewId=null, scenario='STAR_KNIFE', replayVisual=100, replayPlaying=false, replayFrom=0, replayStart=0, replayDuration=6000;
+let siegeRunning=false, siegeTimer=0, lastCollapsedIds=Object.freeze([]);
+let renderError=false, reduced=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)').matches:false, ambientPaused=false;
+let quality='AUTO', performanceTier=1, lowFrames=0, lastDraw=0, raf=0, hidden=false;
+let sceneNow=0, collapseMoment=0, hasCollapse=false, lastToast=0;
+const $=id=>document.getElementById(id);const sky=$('sky'), host=$('observatory'), tooltip=$('tooltip');
+let ctx=null;
+try{ctx=sky.getContext('2d',{alpha:false});if(!ctx)throw Error('Canvas 2D unavailable');}catch(e){renderError=true;}
+const motionQuery=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
+if(motionQuery){const changed=e=>{reduced=e.matches; if(reduced)replayPlaying=false;updateControls();if(!renderError)draw(sceneNow);};if(motionQuery.addEventListener)motionQuery.addEventListener('change',changed);else if(motionQuery.addListener)motionQuery.addListener(changed);}
+const layout=[[-.76,-.52],[-.27,-.79],[.50,-.68],[-.89,-.13],[.04,-.13],[.72,-.23],[-.70,.48],[-.25,.77],[.35,.66],[.89,.36],[-.37,-.34],[.36,.22]];
+const radii=[14,16,11,19,25,15,13,11,18,12,14,16];
+const hues=[38,42,33,26,46,31,45,19,38,41,27,50];
+const connections=[[0,1],[1,2],[0,3],[0,4],[1,4],[2,5],[3,4],[3,6],[4,5],[4,7],[4,10],[4,11],[5,9],[6,7],[7,8],[8,9],[8,11],[9,11],[10,11],[1,10],[2,11]];
+let starTextures=[], flecks=[];
+const view={panX:0,panY:0,targetPanX:0,targetPanY:0,zoom:1,targetZoom:1, drift:0, offset:Object.fromEntries(Array.from({length:12},(_,i)=>[ID(i),{x:0,y:0}]))};
+const pointer={id:null,startX:0,startY:0,lastX:0,lastY:0,dragging:false,hit:null};
+let hoverId=null,screenStars=[];
+function seedFlecks(){let r=randomGenerator(0x91A7F3);flecks=Array.from({length:230},()=>({x:r(),y:r(),size:r()*.8+.2,alpha:r()*.3+.045,depth:r()*.6+.1}));}
+seedFlecks();
+function makeTexture(index){const c=document.createElement('canvas');c.width=c.height=256;const x=c.getContext('2d');const r=randomGenerator(index*131+8753);const hue=hues[index];const halo=x.createRadialGradient(128,128,7,128,128,124);halo.addColorStop(0,'hsla('+hue+',100%,94%,1)');halo.addColorStop(.16,'hsla('+hue+',88%,69%,.95)');halo.addColorStop(.25,'hsla('+hue+',79%,48%,.52)');halo.addColorStop(.42,'hsla('+hue+',72%,38%,.16)');halo.addColorStop(.72,'hsla('+hue+',60%,37%,.045)');halo.addColorStop(1,'hsla('+hue+',55%,35%,0)');x.fillStyle=halo;x.fillRect(0,0,256,256);
+ x.save();x.translate(128,128);for(let j=0;j<9;j++){const angle=(Math.PI*2*j/9)+r()*.37;const reach=51+r()*28;const spread=6+r()*8;x.rotate(angle);x.beginPath();x.moveTo(26,-spread);x.quadraticCurveTo(reach*.72,-spread*.9,reach,0);x.quadraticCurveTo(reach*.73,spread*.8,26,spread);x.fillStyle='hsla('+hue+',90%,66%,.055)';x.fill();x.rotate(-angle);}x.restore();
+ const glow=x.createRadialGradient(128,128,2,128,128,38);glow.addColorStop(0,'#fffbea');glow.addColorStop(.32,'hsl('+hue+',95%,83%)');glow.addColorStop(.72,'hsl('+hue+',88%,54%)');glow.addColorStop(1,'hsla('+hue+',88%,45%,0)');x.fillStyle=glow;x.beginPath();x.arc(128,128,39,0,Math.PI*2);x.fill();
+ x.save();x.beginPath();x.arc(128,128,32,0,Math.PI*2);x.clip();for(let k=0;k<110;k++){const a=r()*6.283,rr=Math.sqrt(r())*33;const px=128+Math.cos(a)*rr,py=128+Math.sin(a)*rr;x.beginPath();x.arc(px,py,r()*4+.2,0,6.283);x.fillStyle='hsla('+(hue+((k%2)?8:-14))+',95%,'+(70+r()*23)+'%,'+(r()*.19)+')';x.fill();}x.restore();return c;}
+function cacheTextures(){starTextures=[];try{for(let i=0;i<12;i++)starTextures[i]=makeTexture(i);}catch(e){starTextures=[];}}
+cacheTextures();
+function currentNode(){return authority.nodes.find(n=>n.id===selectedId);}
+function nodeCollapsed(id,renderState){const n=renderState.nodes.find(s=>s.id===id);return n&&n.starState!=='INTACT';}
+function setSize(){if(renderError)return;const rect=sky.getBoundingClientRect();const factor=quality==='LOW'?.75:quality==='HIGH'?1.75:(performanceTier===0?.8:1.35);const dpr=Math.min(window.devicePixelRatio||1, factor);const width=Math.max(1,Math.floor(rect.width*dpr)),height=Math.max(1,Math.floor(rect.height*dpr));if(sky.width!==width||sky.height!==height){sky.width=width;sky.height=height;}ctx.setTransform(dpr,0,0,dpr,0,0);return{w:rect.width,h:rect.height,dpr};}
+function position(index,w,h){let id=ID(index),off=view.offset[id];return{x:w/2+view.panX+(layout[index][0]*w*.405+off.x)*view.zoom,y:h/2+view.panY+(layout[index][1]*h*.395+off.y)*view.zoom};}
+function drawBackground(w,h,t){ctx.fillStyle='#09090d';ctx.fillRect(0,0,w,h);let g=ctx.createRadialGradient(w*.53,h*.52,15,w*.53,h*.52,Math.max(w,h)*.65);g.addColorStop(0,'rgba(58,43,36,.30)');g.addColorStop(.28,'rgba(30,24,34,.22)');g.addColorStop(.6,'rgba(16,14,22,.07)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+for(const f of flecks){const px=((f.x*w+(view.panX*f.depth*.23)+w*2)%(w+20)),py=((f.y*h+(view.panY*f.depth*.16)+h*2)%(h+20));ctx.globalAlpha=f.alpha;ctx.fillStyle='#ecdfc9';ctx.fillRect(px,py,f.size,f.size);}ctx.globalAlpha=1;}
+function drawInstrument(w,h,t){ctx.save();let cx=w*.5+view.panX*.15,cy=h*.5+view.panY*.15;ctx.translate(cx,cy);const rx=Math.min(w*.43,h*.74),ry=Math.min(h*.39,w*.29);const breathe=(!reduced&&!ambientPaused)?Math.sin(t*.00015)*.004:0;ctx.strokeStyle='rgba(204,168,106,.11)';ctx.lineWidth=1;for(let k=1;k<=4;k++){ctx.beginPath();ctx.ellipse(0,0,rx*(.34+k*.2+breathe),ry*(.34+k*.2),-.15,0,Math.PI*2);ctx.stroke();}ctx.strokeStyle='rgba(213,173,99,.22)';ctx.beginPath();ctx.ellipse(0,0,rx*.88,ry*.88,-.15,-1.1,1.6);ctx.stroke();ctx.beginPath();ctx.ellipse(0,0,rx*1.08,ry*1.08,-.15,1.9,4.7);ctx.stroke();
+ctx.save();ctx.rotate(-.15);for(let k=0;k<96;k++){const a=k/96*Math.PI*2;let major=k%8===0,inner=(major?.94:.97);ctx.strokeStyle=major?'rgba(217,182,122,.3)':'rgba(193,168,128,.10)';ctx.beginPath();ctx.moveTo(Math.cos(a)*rx*inner,Math.sin(a)*ry*inner);ctx.lineTo(Math.cos(a)*rx*(major?1.03:1.005),Math.sin(a)*ry*(major?1.03:1.005));ctx.stroke();}ctx.restore();
+ctx.strokeStyle='rgba(218,181,116,.10)';ctx.beginPath();ctx.moveTo(-rx*1.08,0);ctx.lineTo(rx*1.08,0);ctx.moveTo(0,-ry*1.35);ctx.lineTo(0,ry*1.35);ctx.stroke();ctx.restore();}
+function strokeLink(a,b,selected,preview,t){const dx=b.x-a.x,dy=b.y-a.y;const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;const curvature=(dx*.06-dy*.035);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo(mx-dy*.1,my+dx*.1+curvature,b.x,b.y);ctx.strokeStyle=preview?'rgba(240,198,111,.88)':selected?'rgba(225,186,115,.43)':'rgba(190,151,94,.19)';ctx.lineWidth=preview?1.7: selected?1.1:.75;ctx.stroke();if(preview&&!reduced&&!ambientPaused){const phase=(Math.sin(t*.0015)*.5+.5);ctx.fillStyle='#e9cf9f';ctx.beginPath();ctx.arc(a.x+(b.x-a.x)*phase,a.y+(b.y-a.y)*phase,2.2,0,6.283);ctx.fill();}}
+function targetPreviewIds(){return previewId==='ALL'?ALL_TARGETS:(previewId?[previewId]:[]);}
+function drawLinks(w,h,t){const flagged=new Set(targetPreviewIds());for(const [i,j] of connections){const a=position(i,w,h),b=position(j,w,h);strokeLink(a,b,ID(i)===selectedId||ID(j)===selectedId,flagged.has(ID(i))&&flagged.has(ID(j))&&(scenario!=='STAR_KNIFE')||flagged.has(ID(i))&&scenario==='STAR_KNIFE'||flagged.has(ID(j))&&scenario==='STAR_KNIFE',t);}}
+function drawBlackHole(x,y,r,t,isSelected){const R=r*2.35;ctx.save();ctx.translate(x,y);const phase=(reduced||ambientPaused)?-.32:t*.00016;ctx.rotate(-.28+Math.sin(phase)*.09);const lens=ctx.createRadialGradient(0,0,r*.95,0,0,R*1.25);lens.addColorStop(0,'rgba(0,0,0,1)');lens.addColorStop(.48,'rgba(3,3,6,1)');lens.addColorStop(.65,'rgba(162,103,64,.11)');lens.addColorStop(.8,'rgba(215,155,84,.075)');lens.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=lens;ctx.beginPath();ctx.arc(0,0,R*1.25,0,6.283);ctx.fill();
+for(let k=0;k<4;k++){ctx.beginPath();ctx.ellipse(0,0,R*(.78+k*.11),R*(.26+k*.055),-.12,-Math.PI*.86,Math.PI*.85);ctx.strokeStyle=k===0?'rgba(246,212,147,.78)':k===1?'rgba(189,113,70,.53)':'rgba(204,157,96,.21)';ctx.lineWidth=k===0?2.3:1.5;ctx.stroke();}ctx.rotate(.22);ctx.beginPath();ctx.ellipse(0,0,R*.82,R*.82,0,Math.PI*.94,Math.PI*1.99);ctx.strokeStyle='rgba(244,210,144,.57)';ctx.lineWidth=3;ctx.stroke();let dark=ctx.createRadialGradient(-r*.22,-r*.24,0,0,0,r*1.15);dark.addColorStop(0,'#010103');dark.addColorStop(.82,'#020205');dark.addColorStop(1,'#070508');ctx.fillStyle=dark;ctx.beginPath();ctx.arc(0,0,r*1.07,0,6.283);ctx.fill();ctx.strokeStyle='rgba(248,209,144,.75)';ctx.lineWidth=1.3;ctx.beginPath();ctx.arc(0,0,r*1.11,2.0,5.94);ctx.stroke();ctx.restore();if(isSelected){ctx.save();ctx.strokeStyle='rgba(218,153,124,.22)';ctx.beginPath();ctx.arc(x,y,R*1.63,0,6.283);ctx.stroke();ctx.restore();}}
+function drawStar(index,x,y,r,t){ctx.save();const motion=(reduced||ambientPaused)?0:Math.sin(t*.0006+index*2.3)*.027;const size=r*8*(1+motion);if(starTextures[index]){ctx.globalAlpha=.95;ctx.drawImage(starTextures[index],x-size/2,y-size/2,size,size);}else{const g=ctx.createRadialGradient(x,y,0,x,y,r*3);g.addColorStop(0,'#fff8de');g.addColorStop(.2,'#e1bb79');g.addColorStop(1,'rgba(219,157,75,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r*3,0,6.283);ctx.fill();}ctx.restore();}
+function drawReticle(x,y,r,t,dead){ctx.save();const size=r*3.2;ctx.strokeStyle=dead?'rgba(220,124,109,.77)':'rgba(243,208,145,.74)';ctx.lineWidth=1;for(let j=0;j<4;j++){const a=j*Math.PI/2-.785;ctx.beginPath();ctx.arc(x,y,size,a-.16,a+.16);ctx.stroke();const bx=x+Math.cos(a)*size,by=y+Math.sin(a)*size;ctx.beginPath();ctx.moveTo(bx-Math.cos(a)*6,by-Math.sin(a)*6);ctx.lineTo(bx+Math.cos(a)*6,by+Math.sin(a)*6);ctx.stroke();}ctx.fillStyle=dead?'#e9a8a1':'#e2ccaa';ctx.font='10px ui-monospace,monospace';if(host.clientWidth<550){/* Mobile star selection is labeled in the adjacent specimen panel; avoid overlay collisions. */}else{ctx.textAlign='left';ctx.fillText(selectedId,x+size+13,y-2);ctx.font='9px ui-monospace,monospace';ctx.fillStyle='#b3a28f';ctx.fillText(dead?'BLACK HOLE / SYSTEM DESTROYED':'STELLAR STRUCTURE / INTACT',x+size+13,y+13);}ctx.restore();}
+function drawCollapseShock(x,y,r,t){if(reduced||ambientPaused)return;let elapsed=t-collapseMoment;if(elapsed<0||elapsed>2400)return;const p=elapsed/2400;ctx.save();ctx.beginPath();ctx.arc(x,y,r*(1.2+16*p),0,6.283);ctx.strokeStyle='rgba(222,138,99,'+(1-p)*.7+')';ctx.lineWidth=2.5*(1-p)+.5;ctx.stroke();ctx.beginPath();ctx.arc(x,y,r*(.7+9*p),0,6.283);ctx.strokeStyle='rgba(238,209,136,'+(1-p)*.35+')';ctx.lineWidth=1.2;ctx.stroke();ctx.restore();}
+function drawScenarioGuides(w,h,t){
+ if(scenario!=='SIEGE_WALL')return;
+ const displayed=shownState(),collapsed=SIEGE_ORDER.filter(id=>displayed.nodes.some(n=>n.id===id&&n.starState!=='INTACT'));
+ const centerX=w*.50+view.panX*.12, centerY=h*.50+view.panY*.12;
+ ctx.save();ctx.strokeStyle='rgba(160,76,66,.27)';ctx.lineWidth=1;ctx.setLineDash([4,8]);ctx.beginPath();ctx.ellipse(centerX,centerY,w*.325,h*.34,0,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+ if(collapsed.length>1){ctx.strokeStyle='rgba(230,153,114,.48)';ctx.lineWidth=1.6;ctx.beginPath();for(let i=0;i<collapsed.length;i++){let n=+collapsed[i].slice(3)-1,p=position(n,w,h);if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y);}ctx.stroke();}
+ if(collapsed.length===NODE_COUNT){ctx.strokeStyle='rgba(214,155,109,.34)';ctx.lineWidth=1;ctx.beginPath();const a=position(0,w,h),b=position(11,w,h);ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+ ctx.restore();
+}
+function drawStarbindingSignature(w,h,t){
+ if(scenario!=='STARBINDING'||!hasCollapse||shownState().tick===0||reduced||ambientPaused||replayVisual!==100)return;
+ const elapsed=t-collapseMoment;if(elapsed<0||elapsed>2800)return;const p=elapsed/2800;
+ ctx.save();ctx.strokeStyle='rgba(237,179,113,'+(.38*(1-p)).toFixed(3)+')';ctx.lineWidth=2.3*(1-p)+.1;ctx.beginPath();ctx.ellipse(w*.5,h*.5,w*(.07+p*.54),h*(.07+p*.60),-.12,0,Math.PI*2);ctx.stroke();ctx.restore();
+}
+function drawProjectedStars(w,h,t){
+ const renderState=shownState(),previews=new Set(targetPreviewIds());screenStars=[];
+ for(let i=0;i<NODE_COUNT;i++){
+  const id=ID(i),p=position(i,w,h),r=radii[i]*Math.min(1.17,Math.max(.82,Math.sqrt(view.zoom)));const dead=nodeCollapsed(id,renderState);
+  screenStars.push({id,x:p.x,y:p.y,r:r*2.5});
+  if(dead){drawBlackHole(p.x,p.y,r,t,id===selectedId);if(lastCollapsedIds.includes(id)&&replayVisual===100)drawCollapseShock(p.x,p.y,r,t);}
+  else drawStar(i,p.x,p.y,r,t);
+  if(id===selectedId)drawReticle(p.x,p.y,r,t,dead);
+  else if(id===hoverId){ctx.save();ctx.strokeStyle='rgba(240,209,155,.45)';ctx.beginPath();ctx.arc(p.x,p.y,r*2.25,0,6.283);ctx.stroke();ctx.restore();}
+  if(previews.has(id)&&!dead){ctx.save();ctx.setLineDash([4,7]);ctx.strokeStyle=scenario==='STARBINDING'?'rgba(245,197,139,.65)':'rgba(240,146,103,.74)';ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(p.x,p.y,r*2.8,0,6.283);ctx.stroke();ctx.setLineDash([]);if(previews.size===1){ctx.fillStyle='#efca89';ctx.font='10px ui-monospace,monospace';ctx.textAlign='center';ctx.fillText('EXTRACTION PATH / PREVIEW ONLY',p.x,p.y-r*3.35);}ctx.restore();}
+ }
+ drawStarbindingSignature(w,h,t);
+}
+function draw(t){if(renderError||hidden)return;try{const dims=setSize();if(!dims)return;let {w,h}=dims;if(!reduced&&!ambientPaused){view.panX+=(view.targetPanX-view.panX)*.065;view.panY+=(view.targetPanY-view.panY)*.065;view.zoom+=(view.targetZoom-view.zoom)*.065;}else{view.panX=view.targetPanX;view.panY=view.targetPanY;view.zoom=view.targetZoom;}ctx.save();ctx.clearRect(0,0,w,h);drawBackground(w,h,t);drawInstrument(w,h,t);drawLinks(w,h,t);drawScenarioGuides(w,h,t);drawProjectedStars(w,h,t);ctx.restore();$('projection-readout').textContent='PARALLAX 01 / ZOOM '+view.zoom.toFixed(2)+'x';if(lastDraw&&quality==='AUTO'&&!reduced&&!hidden){const dt=t-lastDraw;if(dt>45)lowFrames++;else lowFrames=Math.max(0,lowFrames-1);if(lowFrames>45){performanceTier=0;lowFrames=-100;}}lastDraw=t;}catch(err){renderError=true;$('field-fallback').style.display='flex';$('view-status').textContent='GRAPHICAL FIELD / OFFLINE';console.error('Projection fault; authority unchanged:',err.message);}}
+function animate(t){raf=0;sceneNow=t;if(hidden)return;if(replayPlaying){const q=Math.min(1,(t-replayStart)/replayDuration);replayVisual=Math.round(q*100);$('scrub').value=String(replayVisual);if(q>=1){replayPlaying=false;replayVisual=100;updateControls();}else updatePlaybackText();}
+if(!renderError)draw(t);if(!reduced&&!ambientPaused||replayPlaying)raf=requestAnimationFrame(animate);}
+function requestDraw(){if(hidden)return;if(reduced||ambientPaused){draw(performance.now());return;}if(!raf)raf=requestAnimationFrame(animate);}
+function stopRAF(){if(raf)cancelAnimationFrame(raf);raf=0;}
+function setSelected(id){if(!authority.nodes.some(n=>n.id===id))return;selectedId=id;previewId=null;hoverId=null;tooltip.style.display='none';const i=+id.slice(3)-1;view.targetPanX=-layout[i][0]*Math.min(host.clientWidth*.405,260)*.20;view.targetPanY=-layout[i][1]*Math.min(host.clientHeight*.395,210)*.20;refresh();requestDraw();}
+const MODE_INFO=Object.freeze({
+ STAR_KNIFE:{title:'STAR KNIFE / SINGLE EXTRACTION',description:'Inspect and extract one selected star. Successful extraction collapses its star and destroys the system on that tick.',scale:'ONE STAR / ONE TICK'},
+ SIEGE_WALL:{title:'SIEGE WALL / DELIBERATE CONTAINMENT',description:'Tiger’s ordered heliocide: twelve representative stars fall on successive ticks to portray a black-hole containment lattice around the Drakken. Display order and projection are schematic, not canonical chronology or coordinates.',scale:'12 SAMPLES / SEQUENTIAL'},
+ STARBINDING:{title:'STARBINDING / ONE MACRO RELEASE',description:'Codec releases one Macro. All twelve displayed successful dives collapse on the SAME simulation tick. Canon: billions of dives; only twelve representative nodes are computed.',scale:'12 OF BILLIONS / SIMULATED'}
+});
+function selectScenario(mode){
+ if(authority.tick>0||siegeRunning||!(mode in MODE_INFO))return;
+ scenario=mode;previewId=null;
+ for(const [key,id] of [['STAR_KNIFE','scenario-knife'],['SIEGE_WALL','scenario-siege'],['STARBINDING','scenario-binding']]){$(id).classList.toggle('active',key===mode);$(id).setAttribute('aria-pressed',String(key===mode));}
+ refresh();requestDraw();
+}
+function preview(){
+ if(authority.tick>0||siegeRunning)return;
+ if(scenario==='STAR_KNIFE'&&currentNode().starState!=='INTACT')return;
+ previewId=scenario==='STAR_KNIFE'?selectedId:'ALL';
+ $('preview-text').textContent=scenario==='STAR_KNIFE'?'Successful extraction of '+selectedId+' immediately collapses its star and destroys its system at tick 001.':scenario==='SIEGE_WALL'?'PROVISIONAL ORDER: ST-01 through ST-12. Twelve separate, successful extractions; one per consecutive integer tick. Every system is destroyed on its own extraction tick. This sample does NOT assert Tiger’s historical target sequence.':'ONE Macro, ONE simulation tick: twelve representative successful star dives execute together, creating twelve black holes and destroying twelve systems. Canon describes billions beyond this sample.';
+ refresh();requestDraw();
+}
+function announceEvent(event,final=false){
+ const title=scenario==='STAR_KNIFE'?'STAR KNIFE / HYPOTHETICAL EVENT':scenario==='SIEGE_WALL'?'SIEGE WALL / SEQUENTIAL HELIOCIDE':'STARBINDING / MACRO RELEASE';
+ $('toast-mode').textContent=title;
+ $('toast-detail').textContent=scenario==='STARBINDING'?'TICK 001 / 12 REPRESENTATIVE SYSTEMS DESTROYED':scenario==='SIEGE_WALL'?'TICK '+String(event.tick).padStart(3,'0')+' / '+event.starId+' / '+event.sequenceIndex+' OF 12':('TICK '+String(event.tick).padStart(3,'0')+' / '+event.starId+' / SYSTEM DESTROYED');
+ $('toast').classList.add('show');if(lastToast)clearTimeout(lastToast);
+ if(final)lastToast=setTimeout(()=>$('toast').classList.remove('show'),5400);
+}
+function commitResult(result,final=true){
+ authority=result.state;events=Object.freeze([...events,result.event]);hasCollapse=true;previewId=null;replayVisual=100;replayPlaying=false;collapseMoment=performance.now();lastCollapsedIds=Object.freeze([...result.event.targets]);
+ $('scrub').value='100';audioSync();announceEvent(result.event,final);refresh();requestDraw();
+}
+function siegeStep(){
+ if(!siegeRunning)return;
+ if(authority.tick>=NODE_COUNT){siegeRunning=false;refresh();return;}
+ commitResult(executeSiegeStep(authority),authority.tick===NODE_COUNT-1);
+ if(authority.tick<NODE_COUNT){siegeTimer=setTimeout(siegeStep,560);}else{siegeRunning=false;refresh();requestDraw();}
+}
+function success(){
+ if(authority.tick>0||siegeRunning||!previewId)return;
+ if(scenario==='STAR_KNIFE'&&previewId!==selectedId)return;
+ if(scenario!=='STAR_KNIFE'&&previewId!=='ALL')return;
+ if(scenario==='STAR_KNIFE'){commitResult(executeSuccess(authority,selectedId));return;}
+ if(scenario==='STARBINDING'){commitResult(executeStarbinding(authority));return;}
+ siegeRunning=true;replayPlaying=false;siegeStep();
+}
+function newBranch(){
+ if(siegeRunning)return;
+ if(siegeTimer)clearTimeout(siegeTimer);siegeTimer=0;
+ replayPlaying=false;
+ for(const id of [...sound.voices.keys()])killVoice(id);
+ retired=Object.freeze([...retired,Object.freeze({branchId:authority.branchId,seed:authority.seed,mode:authority.tick?scenario:'UNEXECUTED',events:Object.freeze([...events]),finalState:authority})]);
+ branchCount++;initial=createInitial(nextSeed(branchCount),'B-'+String(branchCount).padStart(3,'0'));
+ authority=initial;events=Object.freeze([branchOpened(initial)]);selectedId='ST-05';previewId=null;scenario='STAR_KNIFE';replayVisual=100;hasCollapse=false;collapseMoment=0;lastCollapsedIds=Object.freeze([]);
+ view.panX=view.panY=view.targetPanX=view.targetPanY=0;view.zoom=view.targetZoom=1;
+ view.offset=Object.fromEntries(Array.from({length:12},(_,i)=>[ID(i),{x:0,y:0}]));
+ $('toast').classList.remove('show');audioSync();selectScenario('STAR_KNIFE');refresh();requestDraw();
+}
+function recordedTick(){
+ if(!hasCollapse)return authority.tick;
+ if(replayVisual>=100)return authority.tick;
+ if(authority.tick===1)return replayVisual<(scenario==='STARBINDING'?48:27)?0:1;
+ if(replayVisual<9)return 0;
+ return Math.min(authority.tick,Math.floor((replayVisual-9)/83*authority.tick)+1);
+}
+function shownState(){return hasCollapse?reconstitute(initial,events,recordedTick()):authority;}
+function modeDone(){return authority.nodes.filter(n=>n.starState!=='INTACT').length;}
+function refresh(){
+ const n=currentNode(),dead=n.starState!=='INTACT',done=modeDone(),total=scenario==='STAR_KNIFE'?1:NODE_COUNT,completed=!siegeRunning&&hasCollapse;
+ $('branch-header').textContent=authority.branchId+' | TICK '+String(authority.tick).padStart(3,'0');
+ $('selected-name').textContent=n.id;
+ $('star-status').textContent=dead?'COLLAPSED / SYSTEM DESTROYED':'INTACT / SYSTEM EXTANT';$('star-status').classList.toggle('dead',dead);
+ const idx=$('node-index');idx.innerHTML='';for(const star of authority.nodes){const b=document.createElement('button');b.type='button';b.textContent=star.id.slice(3);b.title='Inspect '+star.id;b.setAttribute('aria-label','Inspect '+star.id+(star.starState!=='INTACT'?', collapsed':''));b.setAttribute('aria-pressed',String(star.id===selectedId));b.dataset.dead=String(star.starState!=='INTACT');b.addEventListener('click',()=>setSelected(star.id));idx.appendChild(b);}
+ const m=$('metrics');m.innerHTML='';const sets=[['MASS INDEX',n.mass],['LUMINOSITY',n.flux],['THREAD TENSION',n.tension],['HARMONIC BAND',n.harmonic]];for(const [name,value] of sets){const d=document.createElement('div');d.className='metric';const lbl=document.createElement('div');lbl.className='data-label';lbl.textContent=name;const val=document.createElement('strong');val.textContent=String(value).padStart(2,'0')+' / 99';const bar=document.createElement('div');bar.className='meter';const mark=document.createElement('i');mark.style.setProperty('--val',String(value));bar.appendChild(mark);d.append(lbl,val,bar);m.appendChild(d);}
+ const info=MODE_INFO[scenario];$('mode-kicker').textContent=info.title;$('mode-description').textContent=info.description;$('mode-scale').textContent=info.scale;
+ $('mode-count').textContent=done+' / '+total+(siegeRunning?' / RUNNING':' / COLLAPSED');
+ $('field-mode').textContent=scenario==='SIEGE_WALL'?'SIEGE WALL / 12-NODE LATTICE PROJECTION':scenario==='STARBINDING'?'STARBINDING / 12 OF BILLIONS REPRESENTED':'12 representative nodes / schematic projection';
+ const track=$('mode-track');track.innerHTML='';track.setAttribute('aria-valuemax',String(total));track.setAttribute('aria-valuenow',String(Math.min(total,done)));
+ for(let i=0;i<12;i++){const mark=document.createElement('i');if(i<done)mark.className='done';else if(i===done&&!completed)mark.className='next';track.appendChild(mark);}
+ for(const [mode,id] of [['STAR_KNIFE','scenario-knife'],['SIEGE_WALL','scenario-siege'],['STARBINDING','scenario-binding']]){const b=$(id);b.disabled=authority.tick>0||siegeRunning;b.classList.toggle('active',scenario===mode);b.setAttribute('aria-pressed',String(scenario===mode));}
+ $('preview-note').style.display=previewId!==null?'block':'none';$('preview-btn').disabled=authority.tick>0||siegeRunning;
+ $('execute-btn').disabled=authority.tick>0||siegeRunning||!previewId;
+ $('execute-btn').textContent=siegeRunning?'EXECUTING '+done+' / 12':hasCollapse?'EXECUTED / FINAL':scenario==='SIEGE_WALL'?'02 / BEGIN SIEGE':scenario==='STARBINDING'?'02 / RELEASE MACRO':'02 / AUTHORIZE';
+ $('preview-btn').title=hasCollapse?'This branch is immutable. Start a new hypothetical branch for another scenario.':'Preview the mode without changing authoritative state';
+ $('result').style.display=hasCollapse?'block':'none';
+ if(hasCollapse){$('result-title').textContent=siegeRunning?'Containment lattice forming.':scenario==='SIEGE_WALL'?'Containment lattice complete.':scenario==='STARBINDING'?'Twelve systems destroyed.':'System destroyed.';
+  const ev=events.find(e=>Array.isArray(e.targets)&&e.targets.includes(selectedId))||events[events.length-1];
+  $('result-tick').textContent='TICK '+String(ev.tick).padStart(3,'0');$('result-id').textContent=ev.id;$('result-hash').textContent=ev.postChecksum;
+ }
+  $('scrub').disabled=!completed;$('replay-btn').disabled=!completed;$('present-btn').disabled=!completed;$('new-branch-btn').disabled=siegeRunning;
+  $('resume-siege-btn').hidden=!(scenario==='SIEGE_WALL'&&!siegeRunning&&authority.tick>0&&authority.tick<NODE_COUNT);$('import-btn').disabled=siegeRunning;
+ $('scale-start').textContent='BEFORE / TICK 000';$('scale-middle').textContent=scenario==='SIEGE_WALL'?'12 SEQUENTIAL TICKS':scenario==='STARBINDING'?'ONE MACRO / TICK 001':'EXTRACTION / TICK 001';$('scale-end').textContent='AFTERMATH / '+String(authority.tick).padStart(3,'0');
+ $('record-mark').textContent=siegeRunning?'SEQUENTIAL HELIOCIDE / '+done+' OF 12: LIVE':completed?'RECORDED / '+done+' LOST / TICK '+String(authority.tick).padStart(3,'0'):'NO COLLAPSE RECORDED';
+ updatePlaybackText();renderLedger();renderRequiem();
+}
+function updatePlaybackText(){
+ const playback=hasCollapse&&replayVisual<100&&!siegeRunning;
+ $('archive-notice').style.display=playback?'block':'none';
+ $('view-status').textContent=playback?'REPLAY / TICK '+String(recordedTick()).padStart(3,'0')+' / AUTHORITY UNCHANGED':siegeRunning?'HELIOCIDE / TICK '+String(authority.tick).padStart(3,'0'):hasCollapse?'POST-COLLAPSE / LIVE AUTHORITY':'OBSERVATION / LIVE AUTHORITY';
+  $('replay-btn').textContent=replayPlaying?'PAUSE PLAYBACK':'REPLAY RECORD';
+  updateRequiemPlayback();
+}
+function updateControls(){ $('motion-btn').setAttribute('aria-pressed',String(ambientPaused||reduced));$('motion-btn').textContent=(ambientPaused||reduced)?'\u25b6':'\u275a\u275a';$('motion-btn').title=reduced?'Reduced-motion preference active':'Pause or resume ambient motion';$('motion-btn').setAttribute('aria-label',ambientPaused?'Resume ambient projection motion':'Pause ambient projection motion');updatePlaybackText();}
+
+/* SCORE OF SILENCE. Read-only derived view: authority is never modified by observation. */
+function eventForStar(id){return events.find(e=>Array.isArray(e.targets)&&e.targets.includes(id))||null;}
+function intendedTick(id){if(previewId===null||hasCollapse)return null;if(scenario==='STAR_KNIFE')return id===selectedId?1:null;if(scenario==='STARBINDING')return 1;return SIEGE_ORDER.indexOf(id)+1;}
+function scoreMaxTick(){return Math.max(1,authority.tick,scenario==='SIEGE_WALL'?NODE_COUNT:1);}
+function scorePercent(t,max){return 11+71*t/max;}
+function moveScoreToTick(t){
+ if(!hasCollapse||siegeRunning)return;
+ const v=authority.tick===1?(t===0?0:scenario==='STARBINDING'?65:60):t===0?0:Math.max(10,Math.min(99,9+((t-.5)/authority.tick)*83));
+ scrubbing(v);$('scrub').value=String(replayVisual);
+}
+function selectScoreRow(id){setSelected(id);const ev=eventForStar(id);if(ev&&!siegeRunning)moveScoreToTick(ev.tick);}
+let lastScoreTick=null,lastScorePhase=null,lastScoreSignature=null;
+function renderRequiem(){
+ const board=$('score-rows'),max=scoreMaxTick();
+ const signature=[authority.branchId,authority.tick,events.length,scenario,previewId].join('|');
+ if(lastScoreSignature===signature&&board.children.length===NODE_COUNT){
+  for(let i=0;i<NODE_COUNT;i++)board.children[i].setAttribute('aria-pressed',String(ID(i)===selectedId));
+  lastScoreTick=null;updateRequiemPlayback();return;
+ }
+ lastScoreSignature=signature;board.replaceChildren();
+ $('score-axis-end').textContent=scenario==='SIEGE_WALL'?'SAMPLE TICK 012 / AFTERMATH':'SAMPLE TICK 001 / AFTERMATH';
+ $('score-ruler-label').textContent=previewId!==null&&!hasCollapse?'PLANNED CONSEQUENCES / NOT EXECUTED':hasCollapse?'RECORDED COLLAPSES / AUTHORITATIVE HISTORY':'UNBROKEN / HYPOTHETICAL SAMPLE';
+ for(const n of authority.nodes){
+  const ev=eventForStar(n.id),predicted=intendedTick(n.id),tick=ev?ev.tick:predicted,dead=!!ev,planned=!!(!ev&&predicted!==null);
+  const button=document.createElement('button');button.type='button';button.className='score-row';button.dataset.dead=String(dead);button.dataset.preview=String(planned);button.setAttribute('aria-pressed',String(n.id===selectedId));
+  const fate=dead?'LOST / '+String(tick).padStart(3,'0'):planned?'PLAN / '+String(tick).padStart(3,'0'):'EXTANT';button.setAttribute('aria-label',n.id+' — '+(dead?'collapsed on simulation tick '+tick:planned?'planned collapse on tick '+tick+', not executed':'intact, no collapse recorded')+'. Inspect.');
+  const label=document.createElement('span');label.className='score-label';label.textContent=n.id;
+  const track=document.createElement('span');track.className='score-track';track.setAttribute('aria-hidden','true');
+  const alive=document.createElement('i');alive.className='alive';const pos=tick===null?100:scorePercent(tick,max);alive.style.width=pos+'%';track.appendChild(alive);
+  if(dead){const after=document.createElement('i');after.className='after';after.style.width=(100-pos)+'%';track.appendChild(after);const stop=document.createElement('i');stop.className='ending';stop.style.left='calc('+pos+'% - 1px)';track.appendChild(stop);}
+  else if(planned){const marker=document.createElement('i');marker.className='planned';marker.style.left=pos+'%';track.appendChild(marker);}
+  const readhead=document.createElement('i');readhead.className='readhead';readhead.style.left=scorePercent(recordedTick(),max)+'%';track.appendChild(readhead);
+  const rest=document.createElement('span');rest.className='score-fate';rest.textContent=fate;
+  button.append(label,track,rest);button.addEventListener('click',()=>selectScoreRow(n.id));board.appendChild(button);
+ }
+ lastScoreTick=null;updateRequiemPlayback();
+}
+function updateRequiemPlayback(){
+ const tick=recordedTick(),phase=hasCollapse&&replayVisual<100?'RECONSTRUCTION':'PRESENT';if(lastScoreTick===tick&&lastScorePhase===phase&&$('witness-id').textContent===selectedId)return;lastScoreTick=tick;lastScorePhase=phase;
+ const max=scoreMaxTick(),percent=scorePercent(tick,max);
+ for(const head of $('score-rows').querySelectorAll('.readhead'))head.style.left=percent+'%';
+ $('score-ruler-tick').textContent=phase+' / '+String(tick).padStart(3,'0');
+ const n=shownState().nodes.find(x=>x.id===selectedId),ev=eventForStar(selectedId),plan=intendedTick(selectedId),viewingHistory=hasCollapse&&replayVisual<100;
+ $('witness-title').textContent=selectedId+' / '+(n.starState==='INTACT'?'Intact':'Black hole');
+ $('witness-id').textContent=selectedId;
+ $('witness-tick').textContent=String(tick).padStart(3,'0')+(viewingHistory?' / REPLAY':' / PRESENT');
+ $('witness-system').textContent=n.systemState;
+ $('witness-event').textContent=ev?ev.id+' / '+String(ev.tick).padStart(3,'0'):plan!==null?'PREVIEW / '+String(plan).padStart(3,'0'):'NONE';
+ $('witness-checksum').textContent=shownState().checksum;
+ $('witness-authority').textContent=authority.checksum;
+ $('witness-description').textContent=ev?(n.starState==='INTACT'?'Before the recorded collapse: a reconstruction only. The authoritative star remains destroyed.':'Successful extraction collapsed this star and destroyed its system on tick '+String(ev.tick).padStart(3,'0')+'. The event is final.'):plan!==null?'Preview only. This proposed extraction has NOT occurred; no system has been destroyed in the authoritative branch.':'No successful extraction is recorded for this specimen. Its system remains extant in the authoritative branch.';
+}
+
+function renderLedger(){
+ const list=$('ledger-list');list.innerHTML='';
+ const branches=[...retired.map(b=>({branchId:b.branchId,events:b.events})),{branchId:authority.branchId,events}];
+ const all=branches.flatMap(b=>b.events.map(e=>({event:e,branchId:b.branchId})));
+ for(const {event:e,branchId} of all.reverse()){
+  const el=document.createElement('div');el.className='ledger-entry';const tm=document.createElement('time');tm.textContent=branchId+' / '+String(e.tick).padStart(3,'0');
+  const d=document.createElement('div'),strong=document.createElement('strong'),small=document.createElement('small');
+  strong.textContent=e.type==='HYPOTHETICAL_BRANCH_OPENED'?'HYPOTHETICAL BRANCH / OPENED':e.type==='STAR_KNIFE_EXTRACTION_SUCCESS'?'STAR KNIFE / SUCCESS':e.type==='SIEGE_WALL_HELIOCIDE_STEP'?'SIEGE WALL / CUT '+String(e.sequenceIndex).padStart(2,'0')+'/12':'STARBINDING / MACRO RELEASE';
+  small.textContent=e.type==='HYPOTHETICAL_BRANCH_OPENED'?'12 SAMPLES / '+e.postChecksum:e.type==='STARBINDING_MACRO_RELEASE'?'12 SIMULTANEOUS / TICK '+e.tick+' / '+e.postChecksum:e.starId+' / BLACK HOLE / SYSTEM DESTROYED / '+e.postChecksum;
+  d.append(strong,small);el.append(tm,d);list.appendChild(el);
+ }
+}
+function archivePayload(){
+ const branches=[...retired.map(b=>({...b})),{branchId:authority.branchId,seed:authority.seed,mode:authority.tick?scenario:'UNEXECUTED',events,finalState:authority}];
+ return {schema:'choir-event-archive/2.0',title:'The Choir of Dying Stars',classification:'FICTIONAL_PROVISIONAL_OBSERVATORY',engine:VERSION,
+  canonGroundedRules:['Starsilk is literal programmable cosmological substance.','Macros are repeatable reality-action loops.','Successful Starsilk extraction from a star immediately collapses it into a black hole and destroys its system.','A successful star dive is a Star Knife.','Siege Wall: Tiger deliberately forms a black-hole containment lattice around the Drakken through sequential heliocide.','Starbinding: Codec releases one Macro triggering billions of successful star dives simultaneously.','Starsilk is not conscious or suffering.','Death is final.'],
+  simulationScope:'Twelve synthetic representative nodes only. Siege Wall order, node locations, indices and diagram connections are PROVISIONAL display conventions, not canonical coordinates or history. Starbinding has billions of dives in canon but only twelve local sample outcomes are computed.',
+  recordedPlayback:'Read-only visual reconstruction of immutable hypothetical event history. Authoritative destruction is not reversed.',archivePersistence:'No persistent browser storage. Export JSON and later restore manually. Restore validates every branch and replayed state; checksums are noncryptographic and do not authenticate the archive.',
+  branches:branches.map(b=>({branchId:b.branchId,mode:b.mode,seed:b.seed,initialChecksum:b.events[0].postChecksum,finalChecksum:b.finalState.checksum,events:b.events,finalState:b.finalState}))};
+}
+
+/* PORTABLE EVENT RECOVERY. No storage API, no network, and no untrusted event execution. */
+function canonicalJSON(value){
+ if(Array.isArray(value))return '['+value.map(canonicalJSON).join(',')+']';
+ if(value&&typeof value==='object')return '{'+Object.keys(value).sort().map(k=>JSON.stringify(k)+':'+canonicalJSON(value[k])).join(',')+'}';
+ return JSON.stringify(value);
+}
+function sameRecord(a,b){return canonicalJSON(a)===canonicalJSON(b);}
+function verifyArchiveObject(data){
+ if(!data||typeof data!=='object'||data.schema!=='choir-event-archive/2.0'||data.engine!==VERSION||!Array.isArray(data.branches)||data.branches.length<1||data.branches.length>72)throw Error('Unsupported archive schema, engine, or branch count (limit 72).');
+ const restored=[];
+ for(let j=0;j<data.branches.length;j++){
+  const b=data.branches[j],branchId='B-'+String(j+1).padStart(3,'0');
+  if(!b||b.branchId!==branchId||b.seed!==nextSeed(j+1)||!Array.isArray(b.events)||b.events.length<1||b.events.length>13)throw Error('Branch identity, seed, or event count failed at '+branchId+'.');
+  const start=createInitial(b.seed,branchId);
+  if(b.initialChecksum!==start.checksum||!sameRecord(b.events[0],branchOpened(start)))throw Error('Initial event mismatch at '+branchId+'.');
+  let state=start,mode='UNEXECUTED';const verified=[branchOpened(start)];
+  for(let k=1;k<b.events.length;k++){
+   const e=b.events[k];let outcome;
+   if(e.type==='STAR_KNIFE_EXTRACTION_SUCCESS')outcome=executeSuccess(state,e.starId);
+   else if(e.type==='SIEGE_WALL_HELIOCIDE_STEP')outcome=executeSiegeStep(state);
+   else if(e.type==='STARBINDING_MACRO_RELEASE')outcome=executeStarbinding(state);
+   else throw Error('Unrecognized event at '+branchId+'.');
+   if(!sameRecord(e,outcome.event)||!sameRecord(outcome.state.nodes.map(n=>n.id),SIEGE_ORDER))throw Error('Event transition or checksum failed at '+branchId+' / '+k+'.');
+   if(mode!=='UNEXECUTED'&&mode!==outcome.event.scenario)throw Error('Mixed scenarios in one branch.');
+   mode=outcome.event.scenario;state=outcome.state;verified.push(outcome.event);
+  }
+  if(b.mode!==mode||b.finalChecksum!==state.checksum||!sameRecord(b.finalState,state))throw Error('Final state does not match replay at '+branchId+'.');
+  restored.push(Object.freeze({branchId,seed:b.seed,mode,events:Object.freeze(verified),finalState:state}));
+ }
+ return Object.freeze(restored);
+}
+function restoreArchiveObject(data){
+ if(siegeRunning)throw Error('Finish the active Siege Wall sequence before restoring.');
+ const records=verifyArchiveObject(data); // Fully validate before changing a single active variable.
+ if(siegeTimer){clearTimeout(siegeTimer);siegeTimer=0;}
+ for(const id of [...sound.voices.keys()])killVoice(id);
+ replayPlaying=false;siegeRunning=false;
+ retired=Object.freeze(records.slice(0,-1));const b=records[records.length-1];
+ branchCount=records.length;initial=createInitial(b.seed,b.branchId);authority=b.finalState;events=b.events;
+ scenario=b.mode==='UNEXECUTED'?'STAR_KNIFE':b.mode;selectedId='ST-05';previewId=null;replayVisual=100;hasCollapse=authority.tick>0;lastCollapsedIds=Object.freeze([]);collapseMoment=-1e9;
+ $('scrub').value='100';view.panX=view.panY=view.targetPanX=view.targetPanY=0;view.zoom=view.targetZoom=1;view.offset=Object.fromEntries(Array.from({length:12},(_,i)=>[ID(i),{x:0,y:0}]));
+ $('toast').classList.remove('show');audioSync();refresh();requestDraw();
+ return {branches:records.length,events:records.reduce((sum,x)=>sum+x.events.length,0),checksum:authority.checksum};
+}
+function noteImport(message,error=false){$('import-notice').textContent=message;$('import-notice').dataset.error=String(error);$('import-notice').dataset.ok=String(!error);}
+async function importJSON(file){
+ if(!file)return;
+ if(siegeRunning){noteImport('Finish the current Siege Wall sequence before restoring.',true);return;}
+ if(file.size>2500000||file.size<25){noteImport('REJECTED: unsupported file size. Limit 2.5 MB.',true);return;}
+ try{
+  const parsed=JSON.parse(await file.text());const prepared=verifyArchiveObject(parsed);
+  const replaceCurrent=events.length>1||retired.length>0;
+  if(replaceCurrent&&!window.confirm('Restore '+prepared.length+' archived branch(es)? This replaces the current in-memory session. Export first if you need to preserve it.')){noteImport('RESTORE CANCELLED / current session preserved.');return;}
+  const outcome=restoreArchiveObject(parsed);
+  noteImport('RESTORED / '+outcome.branches+' BRANCHES / '+outcome.events+' EVENTS / VERIFIED '+outcome.checksum);
+ }catch(err){noteImport('REJECTED / '+String(err.message||err).slice(0,220),true);}
+}
+function verifyCurrentArchive(){
+ try{const records=verifyArchiveObject(archivePayload());noteImport('VERIFIED / '+records.length+' BRANCHES / '+records.reduce((n,b)=>n+b.events.length,0)+' EVENTS / REPLAYED AND MATCHED');return true;}
+ catch(err){noteImport('INTEGRITY FAILURE / '+String(err.message||err).slice(0,220),true);return false;}
+}
+
+function exportJSON(){const payload=JSON.stringify(archivePayload(),null,2);const file=new Blob([payload],{type:'application/json'});const url=URL.createObjectURL(file);const a=document.createElement('a');a.href=url;a.download='choir-event-ledger-'+authority.branchId.toLowerCase()+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);}
+function startReplay(){if(!hasCollapse||siegeRunning)return;if(reduced){replayPlaying=false;replayVisual=replayVisual<27?100:0;$('scrub').value=String(replayVisual);updatePlaybackText();draw(performance.now());return;}if(replayPlaying){replayPlaying=false;updateControls();return;}replayPlaying=true;replayVisual=0;$('scrub').value='0';replayStart=performance.now();replayDuration=scenario==='SIEGE_WALL'?8000:scenario==='STARBINDING'?4800:4100;updateControls();requestDraw();}
+function scrubbing(value){if(!hasCollapse||siegeRunning)return;replayPlaying=false;replayVisual=Math.max(0,Math.min(100,Number(value)||0));updateControls();requestDraw();}
+function movePresent(){if(!hasCollapse||siegeRunning)return;replayPlaying=false;replayVisual=100;$('scrub').value='100';updateControls();requestDraw();}
+function resumeSiege(){if(siegeRunning||scenario!=='SIEGE_WALL'||authority.tick<1||authority.tick>=NODE_COUNT)return;siegeRunning=true;replayPlaying=false;replayVisual=100;$('scrub').value='100';siegeStep();}
+/* AUDIO ADAPTER. Entirely separate from the authoritative simulation and visual playback. */
+const sound={enabled:false,context:null,voices:new Map(),available:true};
+function makeVoice(n){if(!sound.context||sound.voices.has(n.id))return;const c=sound.context;const fundamental=c.createOscillator(),upper=c.createOscillator(),mix=c.createGain(),mix2=c.createGain();const hz=62+n.harmonic*.84;fundamental.type='sine';fundamental.frequency.value=hz;upper.type='triangle';upper.frequency.value=hz*2.002;mix.gain.value=.00165;mix2.gain.value=.00024;fundamental.connect(mix).connect(c.destination);upper.connect(mix2).connect(c.destination);fundamental.start();upper.start();sound.voices.set(n.id,{fundamental,upper,mix,mix2});}
+function killVoice(id){const v=sound.voices.get(id);if(!v)return;const c=sound.context;try{v.mix.gain.cancelScheduledValues(c.currentTime);v.mix2.gain.cancelScheduledValues(c.currentTime);v.mix.gain.setValueAtTime(0,c.currentTime);v.mix2.gain.setValueAtTime(0,c.currentTime);v.fundamental.stop(c.currentTime);v.upper.stop(c.currentTime);}catch(e){}sound.voices.delete(id);}
+function audioSync(){if(!sound.enabled||!sound.context)return;for(const n of authority.nodes){if(n.starState==='INTACT')makeVoice(n);else killVoice(n.id);}}
+async function toggleSound(){if(!sound.enabled){try{const Context=window.AudioContext||window.webkitAudioContext;if(!Context)throw Error('Web Audio unsupported');sound.context=sound.context||new Context();await sound.context.resume();sound.enabled=true;audioSync();$('audio-btn').textContent='SOUND / ON';$('audio-btn').setAttribute('aria-pressed','true');}catch(e){sound.enabled=false;sound.available=false;$('audio-btn').textContent='AUDIO UNAVAILABLE';$('audio-btn').disabled=true;}}else{sound.enabled=false;for(const id of [...sound.voices.keys()])killVoice(id);try{await sound.context.suspend();}catch(e){}$('audio-btn').textContent='SOUND / OFF';$('audio-btn').setAttribute('aria-pressed','false');}}
+/* INPUT. Dragged node positions are visual offsets only; engine nodes have no coordinates. */
+function hitTest(x,y){let best=null,min=Infinity;for(const n of screenStars){let dist=Math.hypot(n.x-x,n.y-y);if(dist<Math.max(23,n.r*.82)&&dist<min){best=n.id;min=dist;}}return best;}
+function pointerCoord(e){const r=sky.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+sky.addEventListener('pointerdown',e=>{if(e.button!==0&&e.pointerType==='mouse')return;const p=pointerCoord(e);pointer.id=e.pointerId;pointer.startX=pointer.lastX=p.x;pointer.startY=pointer.lastY=p.y;pointer.dragging=false;pointer.hit=hitTest(p.x,p.y);try{sky.setPointerCapture(e.pointerId);}catch(err){} tooltip.style.display='none';});
+sky.addEventListener('pointermove',e=>{const p=pointerCoord(e);if(pointer.id===e.pointerId){const dx=p.x-pointer.lastX,dy=p.y-pointer.lastY;if(Math.hypot(p.x-pointer.startX,p.y-pointer.startY)>6)pointer.dragging=true;if(pointer.dragging){if(pointer.hit){view.offset[pointer.hit].x+=dx/Math.max(.3,view.zoom);view.offset[pointer.hit].y+=dy/Math.max(.3,view.zoom);}else{view.targetPanX+=dx;view.targetPanY+=dy;}requestDraw();}pointer.lastX=p.x;pointer.lastY=p.y;return;}
+const next=hitTest(p.x,p.y);if(next!==hoverId){hoverId=next;requestDraw();}if(next){const n=authority.nodes.find(n=>n.id===next);$('tip-name').textContent=next;$('tip-bottom').textContent=n.starState==='INTACT'?'SYSTEM EXTANT':'BLACK HOLE / DESTROYED';tooltip.style.display='block';tooltip.style.left=Math.min(p.x+14,host.clientWidth-185)+'px';tooltip.style.top=Math.max(55,Math.min(p.y-55,host.clientHeight-85))+'px';}else tooltip.style.display='none';});
+function releasePointer(e){if(pointer.id!==e.pointerId)return;const p=pointerCoord(e);if(!pointer.dragging&&pointer.hit)setSelected(pointer.hit);pointer.id=null;pointer.hit=null;pointer.dragging=false;try{sky.releasePointerCapture(e.pointerId);}catch(err){}requestDraw();}
+sky.addEventListener('pointerup',releasePointer);sky.addEventListener('pointercancel',e=>{pointer.id=null;pointer.hit=null;pointer.dragging=false;});sky.addEventListener('pointerleave',()=>{hoverId=null;tooltip.style.display='none';requestDraw();});
+sky.addEventListener('wheel',e=>{e.preventDefault();view.targetZoom=Math.max(.6,Math.min(2.7,view.targetZoom*(e.deltaY<0?1.09:.91)));requestDraw();},{passive:false});
+function zoomBy(factor){view.targetZoom=Math.max(.6,Math.min(2.7,view.targetZoom*factor));requestDraw();}
+function resetView(){view.targetPanX=view.targetPanY=0;view.targetZoom=1;for(const id of Object.keys(view.offset)){view.offset[id]={x:0,y:0};}requestDraw();}
+sky.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const i=+selectedId.slice(3)-1;setSelected(ID((i+(e.key==='ArrowRight'?1:11))%12));}else if(e.key==='+'||e.key==='='){e.preventDefault();zoomBy(1.13);}else if(e.key==='-'){e.preventDefault();zoomBy(.87);}else if(e.key==='0'){e.preventDefault();resetView();}});
+$('zoom-in').addEventListener('click',()=>zoomBy(1.19));$('zoom-out').addEventListener('click',()=>zoomBy(.84));$('reset-view').addEventListener('click',resetView);$('motion-btn').addEventListener('click',()=>{ambientPaused=!ambientPaused;updateControls();if(ambientPaused){stopRAF();draw(performance.now());}else requestDraw();});
+$('quality-btn').addEventListener('click',()=>{quality=quality==='AUTO'?'LOW':quality==='LOW'?'HIGH':'AUTO';$('quality-btn').textContent='DETAIL / '+quality;$('quality-btn').setAttribute('aria-label','Rendering detail: '+quality.toLowerCase());requestDraw();});
+$('audio-btn').addEventListener('click',toggleSound);$('scenario-knife').addEventListener('click',()=>selectScenario('STAR_KNIFE'));$('scenario-siege').addEventListener('click',()=>selectScenario('SIEGE_WALL'));$('scenario-binding').addEventListener('click',()=>selectScenario('STARBINDING'));$('preview-btn').addEventListener('click',preview);$('execute-btn').addEventListener('click',success);$('new-branch-btn').addEventListener('click',newBranch);$('resume-siege-btn').addEventListener('click',resumeSiege);$('scrub').addEventListener('input',e=>scrubbing(e.target.value));$('replay-btn').addEventListener('click',startReplay);$('present-btn').addEventListener('click',movePresent);$('export-btn').addEventListener('click',exportJSON);$('verify-btn').addEventListener('click',verifyCurrentArchive);$('import-btn').addEventListener('click',()=>$('import-file').click());$('import-file').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];await importJSON(file);e.target.value='';});
+window.addEventListener('resize',requestDraw,{passive:true});document.addEventListener('visibilitychange',()=>{hidden=document.hidden;if(hidden){stopRAF();lastDraw=0;if(sound.context&&sound.enabled)sound.context.suspend().catch(()=>{});}else{if(sound.context&&sound.enabled)sound.context.resume().catch(()=>{});requestDraw();}});
+window.addEventListener('pagehide',e=>{if(siegeTimer){clearTimeout(siegeTimer);siegeTimer=0;}stopRAF();if(e.persisted){if(sound.context&&sound.enabled)sound.context.suspend().catch(()=>{});}else{for(const id of [...sound.voices.keys()])killVoice(id);if(sound.context)sound.context.close().catch(()=>{});}});
+window.addEventListener('pageshow',e=>{if(e.persisted){if(sound.context&&sound.enabled)sound.context.resume().catch(()=>{});if(siegeRunning&&!siegeTimer)siegeTimer=setTimeout(siegeStep,250);}requestDraw();});
+/* READ-ONLY DIAGNOSTICS FOR DETERMINISTIC, OFFLINE ACCEPTANCE TESTS. */
+window.ChoirDiagnostics=Object.freeze({
+ engineVersion:VERSION,initial:(seed,branchId='B-001')=>clone(createInitial(seed,branchId)),
+ sequence:(seed,id,branchId='B-001')=>{const start=createInitial(seed,branchId),opened=branchOpened(start),result=executeSuccess(start,id);return clone({initial:start,events:[opened,result.event],final:result.state});},
+ siegeSequence:(seed,branchId='B-001')=>{const start=createInitial(seed,branchId);let state=start;const all=[branchOpened(start)];for(let i=0;i<NODE_COUNT;i++){const step=executeSiegeStep(state);state=step.state;all.push(step.event);}return clone({initial:start,events:all,final:state});},
+ starbindingSequence:(seed,branchId='B-001')=>{const start=createInitial(seed,branchId),result=executeStarbinding(start);return clone({initial:start,events:[branchOpened(start),result.event],final:result.state});},
+ reconstruct:(seed,id,tick,branchId='B-001')=>{const start=createInitial(seed,branchId),result=executeSuccess(start,id);return clone(reconstitute(start,[branchOpened(start),result.event],tick));},
+ reconstructEvents:(seed,list,tick,branchId='B-001')=>clone(reconstitute(createInitial(seed,branchId),list,tick)),
+ authority:()=>clone(authority),events:()=>clone(events),archive:()=>clone(archivePayload()),scenario:()=>({mode:scenario,running:siegeRunning,preview:previewId}),
+ audio:()=>({enabled:sound.enabled,voices:sound.voices.size}),
+ playback:()=>({position:replayVisual,playing:replayPlaying,displayTick:recordedTick(),authoritativeChecksum:authority.checksum,shownChecksum:shownState().checksum}),
+ projection:()=>clone({panX:view.panX,panY:view.panY,zoom:view.zoom,offset:view.offset}),renderer:()=>({failed:renderError,quality,performanceTier,reduced}),
+ injectGraphicsFault:()=>{renderError=true;$('field-fallback').style.display='flex';stopRAF();},
+  integrity:()=>{const rebuilt=reconstitute(initial,events,authority.tick);return rebuilt.checksum===authority.checksum;},
+  verifyArchive:(data)=>{try{const records=verifyArchiveObject(data);return {ok:true,branches:records.length,events:records.reduce((n,b)=>n+b.events.length,0),checksum:records[records.length-1].finalState.checksum};}catch(e){return {ok:false,error:String(e.message||e)};}},
+  score:()=>({selectedId,displayTick:recordedTick(),observedChecksum:shownState().checksum,authoritativeChecksum:authority.checksum}),
+  restore:(data)=>restoreArchiveObject(data)
+});
+refresh();updateControls();if(renderError){$('field-fallback').style.display='flex';$('view-status').textContent='GRAPHICAL FIELD / OFFLINE';}else{draw(performance.now());requestDraw();}
+})();
+</script>
+</body>
+</html>
